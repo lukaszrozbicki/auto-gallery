@@ -4,6 +4,7 @@ import { UseCase } from 'domain/UseCase';
 import { Photo } from 'domain/Photo';
 import { useInversify } from 'app/hooks/useInversify';
 import { ApplicationTypes } from 'ioc/types';
+import { ThumbnailsStyled, ThumbnailStyled } from 'app/Thumbnails.styles';
 
 export const App: FunctionComponent = () => {
   const [ photos, setPhotos ] = useState<Photo[]>([]);
@@ -32,14 +33,15 @@ export const App: FunctionComponent = () => {
   }
 
   return (
-    <ul>
+    <ThumbnailsStyled>
       {photos.map((photo: Photo) => (
-        <li
+        <ThumbnailStyled
           key={photo.id}
-        >
-          <img src={`data:image/jpeg;base64,${photo.url}`} alt="" />
-        </li>
+          style={{
+            backgroundImage: `url(data:image/jpeg;base64,${photo.url})`,
+          }}
+        />
       ))}
-    </ul>
+    </ThumbnailsStyled>
   )
 };
